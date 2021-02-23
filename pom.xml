@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>Automation</groupId>
+    <artifactId>WebAutomation</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>Generic</module>
+        <module>Amazon</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>3.141.59</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-chrome-driver</artifactId>
+                <version>3.141.59</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.1</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+            <dependency>
+                <groupId>ru.yandex.qatools.ashot</groupId>
+                <artifactId>ashot</artifactId>
+                <version>1.5.4</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+            <dependency>
+                <groupId>io.github.bonigarcia</groupId>
+                <artifactId>webdrivermanager</artifactId>
+                <version>4.3.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>3.17</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>3.17</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>8.0.16</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.14.3</version>
+                <!-- <scope>test</scope> -->
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.mongodb/mongodb-driver -->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver</artifactId>
+                <version>3.10.2</version>
+            </dependency>
+
+            <!-- Google Sheet API -->
+            <dependency>
+                <groupId>com.google.apis</groupId>
+                <artifactId>google-api-services-drive</artifactId>
+                <version>v3-rev197-1.25.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.apis</groupId>
+                <artifactId>google-api-services-sheets</artifactId>
+                <version>v4-rev20190508-1.30.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.api-client</groupId>
+                <artifactId>google-api-client</artifactId>
+                <version>1.30.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.oauth-client</groupId>
+                <artifactId>google-oauth-client-jetty</artifactId>
+                <version>1.30.1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>2.14.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.14.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.aventstack</groupId>
+                <artifactId>extentreports</artifactId>
+                <version>4.0.9</version>
+            </dependency>
+            <dependency>
+                <groupId>com.relevantcodes</groupId>
+                <artifactId>extentreports</artifactId>
+                <version>2.41.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.rest-assured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>3.3.0</version>
+            </dependency>
+
+        </dependencies>
+
+    </dependencyManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <xmlFile></xmlFile>
+                    </suiteXmlFiles>
+                    <testFailureIgnore>true</testFailureIgnore>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
