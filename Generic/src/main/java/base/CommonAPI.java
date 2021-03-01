@@ -30,6 +30,18 @@ public class CommonAPI {
                 return driver.findElement(By.id(locator));
             case "className":
                 return driver.findElement(By.className(locator));
+            case "cssSelector":
+                return driver.findElement(By.cssSelector(locator));
+            case "linkText":
+                return driver.findElement(By.linkText(locator));
+            case "partialLinkText":
+                return driver.findElement(By.partialLinkText(locator));
+            case "name":
+                return driver.findElement(By.name(locator));
+            case "tagName":
+                return driver.findElement(By.tagName(locator));
+            case "xpath":
+                return driver.findElement(By.xpath(locator));
             default:
                 throw new NoSuchElementException(locator);
         }
