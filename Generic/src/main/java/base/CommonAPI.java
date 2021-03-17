@@ -8,6 +8,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.util.List;
+
 public class CommonAPI {
 
     public WebDriver driver;
@@ -22,6 +24,28 @@ public class CommonAPI {
     public void getLocalDriver() {
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/browser-driver/chromedriver.exe");
         driver = new ChromeDriver();
+    }
+    public List<WebElement> ListOfWebElements(String locatorType, String locator){
+        switch (locatorType) {
+            case "id":
+                return driver.findElements(By.id(locator));
+            case "className":
+                return driver.findElements(By.className(locator));
+            case "cssSelector":
+                return driver.findElements(By.cssSelector(locator));
+            case "linkText":
+                return driver.findElements(By.linkText(locator));
+            case "partialLinkText":
+                return driver.findElements(By.partialLinkText(locator));
+            case "name":
+                return driver.findElements(By.name(locator));
+            case "tagName":
+                return driver.findElements(By.tagName(locator));
+            case "xpath":
+                return driver.findElements(By.xpath(locator));
+            default:
+                throw new NoSuchElementException(locator);
+        }
     }
 
     public WebElement singleElement(String locatorType, String locator) {
