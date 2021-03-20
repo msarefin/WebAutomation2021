@@ -34,7 +34,6 @@ public class CommonAPI {
     public void setUp(@Optional("https://www.amazon.com/") String url) {
         getLocalDriver();
         driver.manage().deleteAllCookies();
-        driver.manage().window().maximize();
         driver.get(url);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
@@ -96,5 +95,6 @@ public class CommonAPI {
     public void teardown() {
         driver.manage().deleteAllCookies();
         driver.close();
+        driver.quit();
     }
 }
