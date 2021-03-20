@@ -3,6 +3,7 @@
 <suite name ="AmazonTest">
     <test name = "Amazon Search By department with keyword">
         <parameter name = "keyword" value = "apple"/>
+        <parameter name = "url" value = "https://www.amazon.com/"/>
         <classes>
             <class name = "search.AmazonSearch"/>
         </classes>

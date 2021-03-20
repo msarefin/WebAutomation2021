@@ -5,27 +5,48 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
+
+import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CommonAPI {
 
-    public WebDriver driver;
+    public static WebDriver driver;
+    private static final String driverLocation = "../Generic/browser-driver/chromedriver.exe";
 
+
+    public static void getLocalDriver() {
+        System.setProperty("webdriver.chrome.driver", driverLocation);
+        driver = new ChromeDriver();
+    }
+
+    @Parameters("url")
     @BeforeMethod
-    public void setUp() {
+    public void setUp(@Optional("https://www.amazon.com/") String url) {
         getLocalDriver();
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
+        driver.get(url);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
     }
 
-    public void getLocalDriver() {
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/browser-driver/chromedriver.exe");
-        driver = new ChromeDriver();
+
+    public void selectFromSelectionList(WebElement element, String text) {
+        Select select = new Select(element);
+        select.selectByValue(text);
     }
-    public List<WebElement> ListOfWebElements(String locatorType, String locator){
+
+    public static List<WebElement> ListOfWebElements(String locatorType, String locator) {
         switch (locatorType) {
             case "id":
                 return driver.findElements(By.id(locator));
@@ -48,7 +69,7 @@ public class CommonAPI {
         }
     }
 
-    public WebElement singleElement(String locatorType, String locator) {
+    public static WebElement singleElement(String locatorType, String locator) {
         switch (locatorType) {
             case "id":
                 return driver.findElement(By.id(locator));
