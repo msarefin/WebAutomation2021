@@ -5,16 +5,9 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,7 +15,7 @@ public class CommonAPI {
 
     public static WebDriver driver;
     private static final String driverLocation = "../Generic/browser-driver/chromedriver.exe";
-
+    Object [] arr = null;
 
     public static void getLocalDriver() {
         System.setProperty("webdriver.chrome.driver", driverLocation);
@@ -40,9 +33,19 @@ public class CommonAPI {
     }
 
 
+    @DataProvider(name = "dataProvider")
+    public Object[] dpMethod(){
+        return  arr ;
+    }
+
     public void selectFromSelectionList(WebElement element, String text) {
         Select select = new Select(element);
         select.selectByValue(text);
+    }
+
+    public static  List<WebElement> listOfWebElements(By locator){
+        List<WebElement>  elements = driver.findElements(locator);
+        return elements;
     }
 
     public static List<WebElement> ListOfWebElements(String locatorType, String locator) {
@@ -66,6 +69,11 @@ public class CommonAPI {
             default:
                 throw new NoSuchElementException(locator);
         }
+    }
+
+    public static WebElement singleElement(By locator){
+        WebElement element = driver.findElement(locator);
+        return element;
     }
 
     public static WebElement singleElement(String locatorType, String locator) {
