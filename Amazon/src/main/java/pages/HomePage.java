@@ -79,4 +79,6 @@ public class HomePage extends CommonAPI {
         singleElement(locator).click();
     }
 
+
+
 }

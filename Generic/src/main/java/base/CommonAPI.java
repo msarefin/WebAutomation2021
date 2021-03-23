@@ -92,6 +92,11 @@ public class CommonAPI {
                 throw new NoSuchElementException(locator);
         }
     }
+    @Parameters({"url"})
+    @AfterMethod
+    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url ){
+        driver.navigate().to(url);
+    }
 
     @AfterSuite
     public void teardown() {
