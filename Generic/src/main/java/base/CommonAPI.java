@@ -15,7 +15,7 @@ public class CommonAPI {
 
     public static WebDriver driver;
     private static final String driverLocation = "../Generic/browser-driver/chromedriver.exe";
-    Object [] arr = null;
+
 
     public static void getLocalDriver() {
         System.setProperty("webdriver.chrome.driver", driverLocation);
@@ -23,28 +23,22 @@ public class CommonAPI {
     }
 
     @Parameters("url")
-    @BeforeMethod
+    @BeforeSuite
     public void setUp(@Optional("https://www.amazon.com/") String url) {
         getLocalDriver();
         driver.manage().deleteAllCookies();
         driver.get(url);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
     }
 
-
-    @DataProvider(name = "dataProvider")
-    public Object[] dpMethod(){
-        return  arr ;
-    }
 
     public void selectFromSelectionList(WebElement element, String text) {
         Select select = new Select(element);
         select.selectByValue(text);
     }
 
-    public static  List<WebElement> listOfWebElements(By locator){
-        List<WebElement>  elements = driver.findElements(locator);
+    public static List<WebElement> listOfWebElements(By locator) {
+        List<WebElement> elements = driver.findElements(locator);
         return elements;
     }
 
@@ -71,7 +65,7 @@ public class CommonAPI {
         }
     }
 
-    public static WebElement singleElement(By locator){
+    public static WebElement singleElement(By locator) {
         WebElement element = driver.findElement(locator);
         return element;
     }
@@ -99,7 +93,7 @@ public class CommonAPI {
         }
     }
 
-    @AfterMethod
+    @AfterSuite
     public void teardown() {
         driver.manage().deleteAllCookies();
         driver.close();

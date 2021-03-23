@@ -3,6 +3,10 @@ package pages;
 import base.CommonAPI;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 
 import java.util.List;
 
@@ -33,21 +37,40 @@ public class HomePage extends CommonAPI {
 
 
     public void clickOnDepartmentButton(By locator) {
-        singleElement(locator).click();
+        Actions ac = new Actions(driver);
+        ac.moveToElement(singleElement(locator)).click().build().perform();
+    }
+
+    static Object[][] arr;
+
+    public static String[][] depratmentListAndKeyword(By locator) {
+        driver.findElement(By.cssSelector("select")).click();
+        List<WebElement> departments = driver.findElements(locator);
+        String[][] dept = new String[departments.size()][2];
+        for (int i = 0; i < dept.length; i++) {
+            dept[i][0] = "apple";
+            dept[i][1] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
+        }
+        return dept;
+    }
+    public static String[] departmentList(By locator){
+        driver.findElement(By.cssSelector("Select")).click();
+        List<WebElement> departments = driver.findElements(locator);
+        String [] dept = new String[departments.size()];
+        for(int i = 0; i< dept.length; i++){
+            dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
+        }
+        return dept;
     }
 
     public void chooseADepartment(By locator) {
-        List<WebElement> departmentsList = listOfWebElements(locator);
-        int n = 0;
-        while (n < departmentsList.size()) {
-            departmentsList.get(n).click();
-            n++;
-        }
+        driver.findElement(locator).click();
     }
 
     public void enterKeywordIntoSearchField(By locator, String keyword) {
-        WebElement element  = singleElement(locator);
+        WebElement element = singleElement(locator);
         element.click();
+        element.clear();
         element.sendKeys(keyword);
 
     }
