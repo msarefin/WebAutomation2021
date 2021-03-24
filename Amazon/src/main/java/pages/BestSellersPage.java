@@ -11,8 +11,6 @@ public class BestSellersPage extends CommonAPI {
         return bestseller;
     }
 
-
-
     public void clickOnBestSeller(By locator){
         driver.findElement(locator).click();
     }
