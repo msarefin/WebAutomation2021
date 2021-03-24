@@ -41,28 +41,6 @@ public class HomePage extends CommonAPI {
         ac.moveToElement(singleElement(locator)).click().build().perform();
     }
 
-    static Object[][] arr;
-
-    public static String[][] depratmentListAndKeyword(By locator) {
-        driver.findElement(By.cssSelector("select")).click();
-        List<WebElement> departments = driver.findElements(locator);
-        String[][] dept = new String[departments.size()][2];
-        for (int i = 0; i < dept.length; i++) {
-            dept[i][0] = "apple";
-            dept[i][1] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
-        }
-        return dept;
-    }
-    public static String[] departmentList(By locator){
-        driver.findElement(By.cssSelector("Select")).click();
-        List<WebElement> departments = driver.findElements(locator);
-        String [] dept = new String[departments.size()];
-        for(int i = 0; i< dept.length; i++){
-            dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
-        }
-        return dept;
-    }
-
     public void chooseADepartment(By locator) {
         driver.findElement(locator).click();
     }
@@ -78,7 +56,6 @@ public class HomePage extends CommonAPI {
     public void clickOnSearchButton(By locator) {
         singleElement(locator).click();
     }
-
 
 
 }

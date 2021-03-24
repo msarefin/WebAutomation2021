@@ -92,6 +92,28 @@ public class CommonAPI {
                 throw new NoSuchElementException(locator);
         }
     }
+
+    public static String[] ElementList(By locator){
+        driver.findElement(By.cssSelector("Select")).click();
+        List<WebElement> departments = driver.findElements(locator);
+        String [] dept = new String[departments.size()];
+        for(int i = 0; i< dept.length; i++){
+            dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
+        }
+        return dept;
+    }
+
+    public static String[][] ElementList(By locator, String keyword) {
+        driver.findElement(By.cssSelector("select")).click();
+        List<WebElement> departments = driver.findElements(locator);
+        String[][] dept = new String[departments.size()][2];
+        for (int i = 0; i < dept.length; i++) {
+            dept[i][0] = keyword;
+            dept[i][1] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
+        }
+        return dept;
+    }
+    
     @Parameters({"url"})
     @AfterMethod
     public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url ){

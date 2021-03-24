@@ -2,3 +2,4 @@
 *.properties
 *.iml
 */target
+*/test-output
