@@ -22,6 +22,10 @@ public class CommonAPI {
         driver = new ChromeDriver();
     }
 
+    public static void goBack(){
+        driver.navigate().back();
+    }
+
     @Parameters("url")
     @BeforeSuite
     public void setUp(@Optional("https://www.amazon.com/") String url) {
@@ -31,6 +35,9 @@ public class CommonAPI {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+    public void clickOnElement(By locator){
+        singleElement(locator).click();
+    }
 
     public void selectFromSelectionList(WebElement element, String text) {
         Select select = new Select(element);

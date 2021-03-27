@@ -54,7 +54,7 @@ public class HomePage extends CommonAPI {
     }
 
     public void clickOnSearchButton(By locator) {
-        singleElement(locator).click();
+        clickOnElement(locator);
     }
 
 
