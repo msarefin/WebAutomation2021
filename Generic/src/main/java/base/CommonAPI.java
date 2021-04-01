@@ -101,8 +101,7 @@ public class CommonAPI {
     }
 
     public static String[] ElementList(By locator){
-        driver.findElement(By.cssSelector("Select")).click();
-        List<WebElement> departments = driver.findElements(locator);
+       List<WebElement> departments = driver.findElements(locator);
         String [] dept = new String[departments.size()];
         for(int i = 0; i< dept.length; i++){
             dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
@@ -111,7 +110,6 @@ public class CommonAPI {
     }
 
     public static String[][] ElementList(By locator, String keyword) {
-        driver.findElement(By.cssSelector("select")).click();
         List<WebElement> departments = driver.findElements(locator);
         String[][] dept = new String[departments.size()][2];
         for (int i = 0; i < dept.length; i++) {

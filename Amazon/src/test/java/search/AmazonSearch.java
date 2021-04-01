@@ -13,6 +13,7 @@ public class AmazonSearch extends CommonAPI {
 
     @DataProvider(name = "SearchEveryDepartmentWithKeyword")
     public Object[][] KeywordSearchByDepRtment() {
+        driver.findElement(By.cssSelector("Select")).click();
         return amazonSearch.ElementList(amazonSearch.getSingleDepartment(), "apple");
     }
 
