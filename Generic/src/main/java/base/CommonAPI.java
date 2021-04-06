@@ -27,7 +27,7 @@ public class CommonAPI {
     }
 
     @Parameters("url")
-    @BeforeSuite
+    @BeforeClass
     public void setUp(@Optional("https://www.amazon.com/") String url) {
         getLocalDriver();
         driver.manage().deleteAllCookies();
@@ -37,6 +37,10 @@ public class CommonAPI {
 
     public void clickOnElement(By locator){
         singleElement(locator).click();
+    }
+
+    public void clickOnElement(WebElement locator){
+        locator.click();
     }
 
     public void selectFromSelectionList(WebElement element, String text) {
@@ -79,6 +83,7 @@ public class CommonAPI {
 
     public static WebElement singleElement(String locatorType, String locator) {
         switch (locatorType) {
+
             case "id":
                 return driver.findElement(By.id(locator));
             case "className":
@@ -100,7 +105,7 @@ public class CommonAPI {
         }
     }
 
-    public static String[] ElementList(By locator){
+    public static String[] ElementListContainsTextXpath(By locator){
        List<WebElement> departments = driver.findElements(locator);
         String [] dept = new String[departments.size()];
         for(int i = 0; i< dept.length; i++){
@@ -109,7 +114,16 @@ public class CommonAPI {
         return dept;
     }
 
-    public static String[][] ElementList(By locator, String keyword) {
+    public static By[] ElementListXpath(By locator){
+        List<WebElement> departments = driver.findElements(locator);
+        WebElement [] dept = new WebElement[departments.size()];
+        for(int i = 0; i< dept.length; i++){
+            dept[i] = (departments.get(i));
+        }
+        return dept;
+    }
+
+    public static String[][] ElementListContainsTextXpath(By locator, String keyword) {
         List<WebElement> departments = driver.findElements(locator);
         String[][] dept = new String[departments.size()][2];
         for (int i = 0; i < dept.length; i++) {

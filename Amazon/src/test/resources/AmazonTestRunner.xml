@@ -8,5 +8,11 @@
             <class name = "search.AmazonSearch"/>
         </classes>
     </test>
+    <test name = "Amazon Best Sellers">
+        <parameter name = "url" value = "http://www.amazon.com"/>
+        <classes>
+            <class name = "search.BestSellers"/>
+        </classes>
+    </test>
 
 </suite>

@@ -2,6 +2,7 @@ package pages;
 
 import base.CommonAPI;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 public class BestSellersPage extends CommonAPI {
     By bestseller = By.xpath("//a[text()='Best Sellers']");
@@ -19,7 +20,7 @@ public class BestSellersPage extends CommonAPI {
         clickOnElement(locator);
     }
 
-    public void clickOnProductUnderCategory(By locator) {
+    public void clickOnProductUnderCategory(WebElement locator) {
         clickOnElement(locator);
     }
 

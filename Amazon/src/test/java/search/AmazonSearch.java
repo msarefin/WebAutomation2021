@@ -14,7 +14,7 @@ public class AmazonSearch extends CommonAPI {
     @DataProvider(name = "SearchEveryDepartmentWithKeyword")
     public Object[][] KeywordSearchByDepRtment() {
         driver.findElement(By.cssSelector("Select")).click();
-        return amazonSearch.ElementList(amazonSearch.getSingleDepartment(), "apple");
+        return amazonSearch.ElementListContainsTextXpath(amazonSearch.getSingleDepartment(), "apple");
     }
 
     @Test(dataProvider = "SearchEveryDepartmentWithKeyword")
@@ -28,7 +28,7 @@ public class AmazonSearch extends CommonAPI {
 
     @DataProvider(name = "SearchEveryDepartment")
     public Object[] SearchByDepartmentOnly(){
-        return amazonSearch.ElementList(amazonSearch.getSingleDepartment());
+        return amazonSearch.ElementListContainsTextXpath(amazonSearch.getSingleDepartment());
     }
 
 
