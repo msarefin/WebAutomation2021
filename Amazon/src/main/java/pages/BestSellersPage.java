@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class BestSellersPage extends CommonAPI {
     By bestseller = By.xpath("//a[text()='Best Sellers']");
-    By category = By.xpath("//div/h3[not (@id='zg_learnMore')]//parent::div//div[@class='zg_rankInfo']");
+    By category = By.xpath("//div/h3[not (@id='zg_learnMore')]//parent::div//div[@class='p13n-sc-truncate-desktop-type2 p13n-sc-truncated']");
 
     public By getCategory() {
         return category;
