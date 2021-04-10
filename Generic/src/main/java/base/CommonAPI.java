@@ -114,11 +114,11 @@ public class CommonAPI {
         return dept;
     }
 
-    public static String[] ElementListXpath(By locator){
+    public static By[] ElementListXpath(By locator){
         List<WebElement> departments = driver.findElements(locator);
-        String [] dept = new String[departments.size()];
+        By [] dept = new By[departments.size()];
         for(int i = 0; i< dept.length; i++){
-            dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
+            dept[i] = locator;
         }
         return dept;
     }
