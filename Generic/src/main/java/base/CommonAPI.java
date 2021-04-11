@@ -36,7 +36,11 @@ public class CommonAPI {
     }
 
     public void clickOnElement(By locator){
-        singleElement(locator).click();
+        if(driver.findElement(locator).isDisplayed()) {
+            singleElement(locator).click();
+        }else{
+            System.out.println("Element was not displayed and couldn't be clicked!!!");
+        }
     }
 
     public void clickOnElement(WebElement locator){

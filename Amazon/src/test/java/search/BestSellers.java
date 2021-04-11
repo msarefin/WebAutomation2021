@@ -21,7 +21,6 @@ public class BestSellers extends CommonAPI {
 
     @Test(dataProvider = "ProductUnderCategries")
     public void shoppingFromBestSellers(By products) {
-        System.out.println(driver.getCurrentUrl());
         bestSellersPage.clickOnProductUnderCategory(products);
         productPage.clickOnAddToCart(productPage.getAddToCartButton());
         productPage.goBack();
