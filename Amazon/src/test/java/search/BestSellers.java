@@ -20,9 +20,10 @@ public class BestSellers extends CommonAPI {
 
 
     @Test(dataProvider = "ProductUnderCategries")
-    public void shoppingFromBestSellers(By products) {
+    public void shoppingFromBestSellers(String products) {
+        String url = driver.getCurrentUrl();
         bestSellersPage.clickOnProductUnderCategory(products);
         productPage.clickOnAddToCart(productPage.getAddToCartButton());
-        productPage.goBack();
+        productPage.goToURL(url);
     }
 }

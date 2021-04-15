@@ -26,6 +26,10 @@ public class CommonAPI {
         driver.navigate().back();
     }
 
+    public static void goToURL(String url){
+        driver.navigate().to(url);
+    }
+
     @Parameters("url")
     @BeforeClass
     public void setUp(@Optional("https://www.amazon.com/") String url) {
@@ -36,11 +40,8 @@ public class CommonAPI {
     }
 
     public void clickOnElement(By locator){
-        if(driver.findElement(locator).isDisplayed()) {
-            singleElement(locator).click();
-        }else{
-            System.out.println("Element was not displayed and couldn't be clicked!!!");
-        }
+        singleElement(locator).click();
+
     }
 
     public void clickOnElement(WebElement locator){
@@ -113,16 +114,16 @@ public class CommonAPI {
        List<WebElement> departments = driver.findElements(locator);
         String [] dept = new String[departments.size()];
         for(int i = 0; i< dept.length; i++){
-            dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
+
         }
         return dept;
     }
 
-    public static By[] ElementListXpath(By locator){
+    public static String[] ElementListXpath(By locator){
         List<WebElement> departments = driver.findElements(locator);
-        By [] dept = new By[departments.size()];
+        String [] dept = new String[departments.size()];
         for(int i = 0; i< dept.length; i++){
-            dept[i] = locator;
+            dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
         }
         return dept;
     }
