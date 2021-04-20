@@ -1,6 +1,7 @@
 package search;
 
 import base.CommonAPI;
+import com.relevantcodes.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.DataProvider;
@@ -21,6 +22,7 @@ public class BestSellers extends CommonAPI {
 
     @Test(dataProvider = "ProductUnderCategries")
     public void shoppingFromBestSellers(String products) {
+        extentTest = extentReports.startTest("Best Seller");
         String url = driver.getCurrentUrl();
         bestSellersPage.clickOnBestSeller(bestSellersPage.getBestseller());
         bestSellersPage.clickOnProductUnderCategory(products);

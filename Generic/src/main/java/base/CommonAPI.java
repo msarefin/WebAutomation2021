@@ -1,5 +1,7 @@
 package base;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +18,8 @@ public class CommonAPI {
     public static WebDriver driver;
     private static final String driverLocation = "../Generic/browser-driver/chromedriver.exe";
 
+    public static ExtentReports extentReports;
+    public static ExtentTest extentTest;
 
     public static void getLocalDriver() {
         System.setProperty("webdriver.chrome.driver", driverLocation);
@@ -37,6 +41,15 @@ public class CommonAPI {
         driver.manage().deleteAllCookies();
         driver.get(url);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    @BeforeTest
+    public void Reports(){
+        extentReports = new ExtentReports(System.getProperty("user.dir")+"/Reports/ExtentReports/ExtentReport.html",true);
+        extentReports.addSystemInfo("Host Name", "Local Host");
+        extentReports.addSystemInfo("Environment", "QA");
+        extentReports.addSystemInfo("User Name","Arefin");
+
     }
 
     public void clickOnElement(By locator){
