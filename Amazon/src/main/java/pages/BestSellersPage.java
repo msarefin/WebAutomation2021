@@ -2,7 +2,6 @@ package pages;
 
 import base.CommonAPI;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class BestSellersPage extends CommonAPI {
     By bestseller = By.xpath("//a[text()='Best Sellers']");

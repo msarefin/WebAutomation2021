@@ -127,7 +127,7 @@ public class CommonAPI {
        List<WebElement> departments = driver.findElements(locator);
         String [] dept = new String[departments.size()];
         for(int i = 0; i< dept.length; i++){
-
+            dept[i] = departments.get(i).getText();
         }
         return dept;
     }
