@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.*;
 
+import java.io.File;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,8 +19,8 @@ public class CommonAPI {
     public static WebDriver driver;
     private static final String driverLocation = "../Generic/browser-driver/chromedriver.exe";
 
-    public static ExtentReports extentReports;
-    public static ExtentTest extentTest;
+    public static ExtentReports extent;
+    public static ExtentTest test;
 
     public static void getLocalDriver() {
         System.setProperty("webdriver.chrome.driver", driverLocation);
@@ -45,11 +46,34 @@ public class CommonAPI {
 
     @BeforeTest
     public void Reports(){
-        extentReports = new ExtentReports(System.getProperty("user.dir")+"/Reports/ExtentReports/ExtentReport.html",true);
-        extentReports.addSystemInfo("Host Name", "Local Host");
-        extentReports.addSystemInfo("Environment", "QA");
-        extentReports.addSystemInfo("User Name","Arefin");
+        extent = new ExtentReports(System.getProperty("user.dir")+"/Reports/ExtentReports/ExtentReport.html",true);
+        extent.addSystemInfo("Host Name", "Local Host");
+        extent.addSystemInfo("Environment", "QA");
+        extent.addSystemInfo("User Name","Arefin");
+        extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-config.xml"));
+        test = extent.startTest("demo Dummy Test");
+        test.assignCategory("Just a Demo");
+    }
 
+
+    @Parameters({"url"})
+    @AfterMethod
+    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url ){
+        driver.navigate().to(url);
+    }
+
+    @AfterTest
+    public void closeExt(){
+        extent.flush();
+
+    }
+
+    @AfterSuite
+    public void teardown() {
+        driver.manage().deleteAllCookies();
+        driver.close();
+        driver.quit();
+        extent.close();
     }
 
     public void clickOnElement(By locator){
@@ -151,16 +175,5 @@ public class CommonAPI {
         return dept;
     }
     
-    @Parameters({"url"})
-    @AfterMethod
-    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url ){
-        driver.navigate().to(url);
-    }
 
-    @AfterSuite
-    public void teardown() {
-        driver.manage().deleteAllCookies();
-        driver.close();
-        driver.quit();
-    }
 }

@@ -20,13 +20,12 @@ public class BestSellers extends CommonAPI {
 
     @Test(dataProvider = "ProductUnderCategries")
     public void shoppingFromBestSellers(String products) {
-        extentTest = extentReports.startTest("Best Seller");
-        extentTest.assignCategory("QA");
-        extentTest.log(LogStatus.PASS,"The Test Passed");
+
         String url = driver.getCurrentUrl();
         bestSellersPage.clickOnBestSeller(bestSellersPage.getBestseller());
         bestSellersPage.clickOnProductUnderCategory(products);
         productPage.clickOnAddToCart(productPage.getAddToCartButton());
         productPage.goToURL(url);
+        test.log(LogStatus.FAIL, "The Assert Pass Condition is True");
     }
 }
