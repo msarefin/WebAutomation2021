@@ -18,14 +18,20 @@ public class BestSellers extends CommonAPI {
     }
 
 
+    int i = 0;
     @Test(dataProvider = "ProductUnderCategries")
     public void shoppingFromBestSellers(String products) {
-
+        test = extent.startTest("demo Dummy Test");
+        test.assignCategory("Just a Demo:"+products);
         String url = driver.getCurrentUrl();
         bestSellersPage.clickOnBestSeller(bestSellersPage.getBestseller());
+        test.log(LogStatus.PASS,"Click on Best Seller");
         bestSellersPage.clickOnProductUnderCategory(products);
+        test.log(LogStatus.PASS,"Click on Product Category");
         productPage.clickOnAddToCart(productPage.getAddToCartButton());
+        test.log(LogStatus.PASS,"Click on Add to Cart");
         productPage.goToURL(url);
-        test.log(LogStatus.FAIL, "The Assert Pass Condition is True");
+        test.log(LogStatus.PASS,"Navigated to "+url);
+
     }
 }

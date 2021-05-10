@@ -51,8 +51,7 @@ public class CommonAPI {
         extent.addSystemInfo("Environment", "QA");
         extent.addSystemInfo("User Name","Arefin");
         extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-config.xml"));
-        test = extent.startTest("demo Dummy Test");
-        test.assignCategory("Just a Demo");
+
     }
 
 
@@ -73,7 +72,7 @@ public class CommonAPI {
         driver.manage().deleteAllCookies();
         driver.close();
         driver.quit();
-        extent.close();
+    //        extent.close();
     }
 
     public void clickOnElement(By locator){
