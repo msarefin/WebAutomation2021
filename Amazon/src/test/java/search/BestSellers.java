@@ -21,8 +21,10 @@ public class BestSellers extends CommonAPI {
     int i = 0;
     @Test(dataProvider = "ProductUnderCategries")
     public void shoppingFromBestSellers(String products) {
-        test = extent.startTest("demo Dummy Test");
+        test = extent.startTest("Shopping from BestSellers");
+        test.assignCategory("Functional Testing");
         test.assignCategory("Just a Demo:"+products);
+        test.assignAuthor("MSA", "Sunny");
         String url = driver.getCurrentUrl();
         bestSellersPage.clickOnBestSeller(bestSellersPage.getBestseller());
         test.log(LogStatus.PASS,"Click on Best Seller");
