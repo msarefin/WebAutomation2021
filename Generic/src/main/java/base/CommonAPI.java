@@ -2,12 +2,15 @@ package base;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
 
 import java.io.File;
@@ -17,13 +20,15 @@ import java.util.concurrent.TimeUnit;
 public class CommonAPI {
 
     public static WebDriver driver;
-    private static final String driverLocation = "../Generic/browser-driver/chromedriver.exe";
+    private static final String driverLocation = "../Generic/browser-driver/ChromeDriver/chromedriver.exe";
 
     public static ExtentReports extent;
     public static ExtentTest test;
 
     public static void getLocalDriver() {
         System.setProperty("webdriver.chrome.driver", driverLocation);
+        ChromeOptions options = new ChromeOptions();
+
         driver = new ChromeDriver();
     }
 
@@ -54,11 +59,26 @@ public class CommonAPI {
 
     }
 
+    @BeforeMethod
+    public void extentReportStart(){
+        test = extent.startTest("Shopping from BestSellers");
+        test.assignCategory("Functional Testing");
+
+        test.assignAuthor("MSA", "Sunny");
+    }
 
     @Parameters({"url"})
     @AfterMethod
-    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url ){
+    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url, ITestResult result){
+        if (result.getStatus() == ITestResult.FAILURE) {
+            test.log(LogStatus.FAIL, "Test was Failed!!"+result.getThrowable());
+        } else if (result.getStatus() == ITestResult.SKIP) {
+            test.log(LogStatus.SKIP, "Test was Skipped " + result.getThrowable());
+        } else {
+            test.log(LogStatus.PASS, "Test Passed!!");
+        }
         driver.navigate().to(url);
+
     }
 
     @AfterTest
