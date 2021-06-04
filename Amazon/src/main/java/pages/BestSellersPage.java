@@ -1,6 +1,7 @@
 package pages;
 
 import base.CommonAPI;
+import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.By;
 
 public class BestSellersPage extends CommonAPI {
@@ -15,10 +16,12 @@ public class BestSellersPage extends CommonAPI {
     }
 
     public void clickOnBestSeller(By locator) {
+        test.log(LogStatus.INFO, convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         clickOnElement(locator);
     }
 
     public void clickOnProductUnderCategory(String locator) {
+        test.log(LogStatus.INFO, convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         clickOnElement(By.xpath(locator));
     }
 

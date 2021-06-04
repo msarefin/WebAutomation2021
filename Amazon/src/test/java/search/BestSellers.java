@@ -19,21 +19,19 @@ public class BestSellers extends CommonAPI {
 
 
     int i = 0;
+
     @Test(dataProvider = "ProductUnderCategries")
     public void shoppingFromBestSellers(String products) {
 //        test = extent.startTest("Shopping from BestSellers");
 //        test.assignCategory("Functional Testing");
-        test.assignCategory("Just a Demo:"+products);
+        test.assignCategory("Just a Demo:" + products);
 //        test.assignAuthor("MSA", "Sunny");
         String url = driver.getCurrentUrl();
         bestSellersPage.clickOnBestSeller(bestSellersPage.getBestseller());
-        test.log(LogStatus.INFO,"Click on Best Seller","Clicked on the Best Seller");
         bestSellersPage.clickOnProductUnderCategory(products);
-        test.log(LogStatus.INFO,"Click on Product Category", "Clicked on the category");
         productPage.clickOnAddToCart(productPage.getAddToCartButton());
-        test.log(LogStatus.INFO,"Click on Add to Cart","The quantity in cart should increase");
         productPage.goToURL(url);
-        test.log(LogStatus.INFO,"Navigated to "+url, "This should take you back to Best Seller Page!");
+        test.log(LogStatus.INFO, "Navigated to " + url, "This should take you back to Best Seller Page!");
 
     }
 }

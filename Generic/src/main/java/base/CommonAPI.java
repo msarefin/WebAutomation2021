@@ -3,6 +3,7 @@ package base;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +37,8 @@ public class CommonAPI {
         driver.navigate().back();
     }
 
-    public static void goToURL(String url){
+    public void goToURL(String url){
+        test.log(LogStatus.INFO, convertToString(new Object(){}.getClass().getEnclosingMethod().getName())+" : "+url);
         driver.navigate().to(url);
     }
 
@@ -93,6 +95,12 @@ public class CommonAPI {
         driver.close();
         driver.quit();
     //        extent.close();
+    }
+
+    public String convertToString(String st){
+        String splitString= null;
+        splitString = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(st),' ');
+        return splitString;
     }
 
     public void clickOnElement(By locator){
