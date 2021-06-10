@@ -21,6 +21,7 @@ public class BestSellersPage extends CommonAPI {
     }
 
     public void clickOnProductUnderCategory(String locator) {
+//        product = driver.findElement(By.xpath(locator)).getText();
         test.log(LogStatus.INFO, convertToString(new Object(){}.getClass().getEnclosingMethod().getName()));
         clickOnElement(By.xpath(locator));
     }

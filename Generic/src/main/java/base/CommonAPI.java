@@ -33,12 +33,11 @@ public class CommonAPI {
         driver = new ChromeDriver();
     }
 
-    public static void goBack(){
+    public static void goBack() {
         driver.navigate().back();
     }
 
-    public void goToURL(String url){
-        test.log(LogStatus.INFO, convertToString(new Object(){}.getClass().getEnclosingMethod().getName())+" : "+url);
+    public void goToURL(String url) {
         driver.navigate().to(url);
     }
 
@@ -52,63 +51,72 @@ public class CommonAPI {
     }
 
     @BeforeTest
-    public void Reports(){
-        extent = new ExtentReports(System.getProperty("user.dir")+"/Reports/ExtentReports/ExtentReport.html",true);
+    public void Reports() {
+        extent = new ExtentReports(System.getProperty("user.dir") + "/Reports/ExtentReports/ExtentReport.html", true);
         extent.addSystemInfo("Host Name", "Local Host");
         extent.addSystemInfo("Environment", "QA");
-        extent.addSystemInfo("User Name","Arefin");
-        extent.loadConfig(new File(System.getProperty("user.dir")+"/extent-config.xml"));
-
-    }
-
-    @BeforeMethod
-    public void extentReportStart(){
+        extent.addSystemInfo("User Name", "Arefin");
+        extent.loadConfig(new File(System.getProperty("user.dir") + "/extent-config.xml"));
         test = extent.startTest("Shopping from BestSellers");
         test.assignCategory("Functional Testing");
-
         test.assignAuthor("MSA", "Sunny");
+    }
+
+    public static String product = "";
+
+    @BeforeMethod()
+    public void extentReportStart() {
+        test = extent.startTest("BestSeller : "+product);
+
+
     }
 
     @Parameters({"url"})
     @AfterMethod
-    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url, ITestResult result){
+    public void navigateBackToHomePage(@Optional("https://www.amazon.com/") String url, ITestResult result) {
         if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(LogStatus.FAIL, "Test was Failed!!"+result.getThrowable());
+            test.log(LogStatus.FAIL, "Test was Failed!!" + result.getThrowable());
         } else if (result.getStatus() == ITestResult.SKIP) {
             test.log(LogStatus.SKIP, "Test was Skipped " + result.getThrowable());
         } else {
             test.log(LogStatus.PASS, "Test Passed!!");
         }
         driver.navigate().to(url);
+        extent.endTest(test);
+
+
+
 
     }
 
     @AfterTest
-    public void closeExt(){
-        extent.flush();
+    public void closeExt() {
+
+
 
     }
+
 
     @AfterSuite
     public void teardown() {
         driver.manage().deleteAllCookies();
         driver.close();
         driver.quit();
-    //        extent.close();
+        extent.flush();
     }
 
-    public String convertToString(String st){
-        String splitString= null;
-        splitString = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(st),' ');
+    public String convertToString(String st) {
+        String splitString = null;
+        splitString = StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(st), ' ');
         return splitString;
     }
 
-    public void clickOnElement(By locator){
+    public void clickOnElement(By locator) {
         singleElement(locator).click();
 
     }
 
-    public void clickOnElement(WebElement locator){
+    public void clickOnElement(WebElement locator) {
         locator.click();
     }
 
@@ -174,19 +182,19 @@ public class CommonAPI {
         }
     }
 
-    public static String[] ElementListContainsTextXpath(By locator){
-       List<WebElement> departments = driver.findElements(locator);
-        String [] dept = new String[departments.size()];
-        for(int i = 0; i< dept.length; i++){
+    public static String[] ElementListContainsTextXpath(By locator) {
+        List<WebElement> departments = driver.findElements(locator);
+        String[] dept = new String[departments.size()];
+        for (int i = 0; i < dept.length; i++) {
             dept[i] = departments.get(i).getText();
         }
         return dept;
     }
 
-    public static String[] ElementListXpath(By locator){
+    public static String[] ElementListXpath(By locator) {
         List<WebElement> departments = driver.findElements(locator);
-        String [] dept = new String[departments.size()];
-        for(int i = 0; i< dept.length; i++){
+        String[] dept = new String[departments.size()];
+        for (int i = 0; i < dept.length; i++) {
             dept[i] = ("//*[contains(text(),'" + departments.get(i).getText().trim() + "')]");
         }
         return dept;
@@ -201,6 +209,6 @@ public class CommonAPI {
         }
         return dept;
     }
-    
+
 
 }
